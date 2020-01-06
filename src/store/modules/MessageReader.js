@@ -1,5 +1,5 @@
 import { MailService } from '../../api/MailService';
-import {mailboxMutations} from './Mailbox';
+import { mailboxMutations } from './Mailbox';
 
 export const messageReaderMutations = {
   messageLoading:  '[Message Reader] Message Loading',
@@ -51,7 +51,7 @@ export const messageReader = {
       MailService.deleteMessage(mailbox, id)
         .then(() => {
           context.commit(messageReaderMutations.messageDeleted, {mailbox, id});
-          // context.commit(mailboxMutations.messageDeleted, {mailbox, id});
+          context.commit(mailboxMutations.messageDeleted, {mailbox, id});
         });
     }
   }

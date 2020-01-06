@@ -1,5 +1,4 @@
 import { MailService } from '../../api/MailService';
-import { messageReaderMutations } from './MessageReader';
 
 export const mailboxMutations = {
   messagesLoading: '[Mailbox] Messages Loading',
@@ -26,7 +25,7 @@ export const mailbox = {
       state[mailbox] = messages;
       state.isLoading = false;
     },
-    [messageReaderMutations.messageDeleted]: (state, payload) => {
+    [mailboxMutations.messageDeleted]: (state, payload) => {
       const {mailbox, id} = payload;
       const deletedIndex = state[mailbox].findIndex(msg => msg.id === id);
       const result = state[mailbox].slice(0, deletedIndex).concat(state[mailbox].slice(deletedIndex + 1));
