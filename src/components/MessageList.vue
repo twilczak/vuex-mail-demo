@@ -116,7 +116,7 @@
         },
         viewMessageLink(message) {
           const mailbox = this.isInbox() ? 'inbox' : 'outbox';
-          return `/${mailbox}/view/${message.id}`;
+          return message ? `/${mailbox}/view/${message.id}` : '';
         },
         scrollMessageIntoView(id) {
           const element = document.getElementById(id);

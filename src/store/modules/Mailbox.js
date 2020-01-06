@@ -1,4 +1,15 @@
 import { MailService } from '../../api/MailService';
+import { messageReaderMutations } from './MessageReader';
+
+export const mailboxMutations = {
+  messagesLoading: '[Mailbox] Messages Loading',
+  messagesLoaded: '[Mailbox] Messages Loaded',
+  messageDeleted: '[Mailbox] Message Deleted'
+};
+
+export const mailboxActions = {
+  fetchMessages: '[Mailbox] Fetch Messages'
+};
 
 export const mailbox = {
   state: {
@@ -7,23 +18,28 @@ export const mailbox = {
     outbox: [],
   },
   mutations: {
-    messagesLoading: (state) => {
+    [mailboxMutations.messagesLoading]: (state) => {
       state.isLoading = true;
-      state.error = null;
     },
-    messagesLoaded: (state, payload) => {
+    [mailboxMutations.messagesLoaded]: (state, payload) => {
       const {mailbox, messages} = payload;
       state[mailbox] = messages;
       state.isLoading = false;
     },
+    [messageReaderMutations.messageDeleted]: (state, payload) => {
+      const {mailbox, id} = payload;
+      const deletedIndex = state[mailbox].findIndex(msg => msg.id === id);
+      const result = state[mailbox].slice(0, deletedIndex).concat(state[mailbox].slice(deletedIndex + 1));
+      state[mailbox] = result;
+    }
   },
   actions: {
-    fetchMessages: (context, payload) => {
-      context.commit('messagesLoading', {...payload});
+    [mailboxActions.fetchMessages]: (context, payload) => {
+      context.commit(mailboxMutations.messagesLoading, {...payload});
       MailService
         .getMessages(payload.mailbox)
         .then(messages => {
-          context.commit('messagesLoaded', {...payload, messages});
+          context.commit(mailboxMutations.messagesLoaded, {...payload, messages});
         });
     },
   },

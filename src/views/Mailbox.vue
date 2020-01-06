@@ -25,11 +25,12 @@
 <script>
     import MailboxControls from '../components/MailboxControls';
     import MessageList from '../components/MessageList';
+    import { mailboxActions } from '../store/modules/Mailbox';
     import store from '../store';
 
     function fetchMessages(to, from, next) {
       const mailbox = getMailbox(to);
-      store.dispatch('fetchMessages', {mailbox});
+      store.dispatch(mailboxActions.fetchMessages, {mailbox});
       next();
     }
 

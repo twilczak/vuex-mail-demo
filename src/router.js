@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Mailbox from './views/Mailbox';
+import MessageReader from './views/MessageReader';
 
 Vue.use(Router);
 
@@ -8,24 +9,24 @@ Vue.use(Router);
 //   path: 'compose',
 //   component: MessageComposer,
 // };
-//
-// const view = {
-//   path: 'view/:id',
-//   component: MessageReader,
-// };
+
+const view = {
+  path: 'view/:id',
+  component: MessageReader,
+};
 
 const inbox = {
   path: '/inbox',
   name: 'inbox',
   component: Mailbox,
-  children: [/*compose, view*/],
+  children: [view/*, compose*/],
 };
 
 const outbox = {
   path: '/outbox',
   name: 'outbox',
   component: Mailbox,
-  children: [/*compose, view*/]
+  children: [view/*, compose*/]
 };
 
 const base = {
