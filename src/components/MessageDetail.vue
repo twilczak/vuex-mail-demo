@@ -22,7 +22,7 @@
 <template>
     <div class="inherit-grid">
         <div class="message-controls">
-            <button class="message-button" @click="onDelete(message)">Delete</button>
+            <button class="message-button" @click="deleteMessage(message)">Delete</button>
             <button class="message-button" disabled="disabled">Reply</button>
         </div>
         <div class="message-detail">
@@ -40,7 +40,11 @@
       name: 'MessageDetail',
       props: {
         message: Object,
-        onDelete: Function, // TODO: Change to event
+      },
+      methods: {
+        deleteMessage(message) {
+          this.$emit('deleteMessage', message);
+        }
       }
     }
 </script>

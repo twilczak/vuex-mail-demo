@@ -57,9 +57,6 @@
           recipient: '',
         };
       },
-      props: {
-        onSend: Function, // TODO: Refactor this from function to event
-      },
       methods: {
         cancelLink() {
           const route = this.$route.path.split('/').filter(element => !!element);
@@ -68,7 +65,7 @@
         },
         sendMessage() {
           const {body, subject, recipient} = this;
-          this.onSend({sender: 'Me', body, subject, recipient});
+          this.$emit('sendMessage', {sender: 'Me', body, subject, recipient});
         },
         validateInput(event) {
           if(!event.target.value.trim()) {

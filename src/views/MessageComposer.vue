@@ -7,7 +7,7 @@
 </style>
 
 <template>
-    <MessageForm :on-send="onSend"></MessageForm>
+    <MessageForm @sendMessage="sendMessage"></MessageForm>
 </template>
 
 <script>
@@ -19,7 +19,7 @@
       name: 'MessageComposer',
       components: { MessageForm },
       methods: {
-        onSend(message) {
+        sendMessage(message) {
           store.dispatch(messageComposerActions.sendMessage, {message}).then(sentMessage => {
             const {id} = sentMessage;
             const route = this.$route.path.split('/').filter(element => !!element);

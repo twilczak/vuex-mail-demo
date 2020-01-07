@@ -8,7 +8,7 @@
 
 <template>
     <div class="message-reader">
-        <MessageDetail :message="message" :on-delete="onDelete"></MessageDetail>
+        <MessageDetail :message="message" @deleteMessage="deleteMessage"></MessageDetail>
     </div>
 </template>
 
@@ -42,7 +42,7 @@
       beforeRouteEnter: fetchMessage,
       beforeRouteUpdate: fetchMessage,
       methods: {
-        onDelete(message) {
+        deleteMessage(message) {
           const {mailbox} = getRouteParams(this.$route);
           const {id} = message;
           store
