@@ -20,11 +20,17 @@
       components: { MessageForm },
       methods: {
         onSend(message) {
-          store.dispatch(messageComposerActions.sendMessage, {message});
-          const route = this.$route.path.split('/').filter(element => !!element);
-          const mailbox = route[0];
-          this.$router.push(`/${mailbox}`);
-          // TODO: View sent message if mailbox is outbox?
+          store.dispatch(messageComposerActions.sendMessage, {message}).then(sentMessage => {
+            const {id} = sentMessage;
+            const route = this.$route.path.split('/').filter(element => !!element);
+            const mailbox = route[0];
+            if (mailbox === 'outbox') {
+              this.$router.push(`/${mailbox}/view/${id}`);
+            } else {
+              this.$router.push(`/${mailbox}`);
+            }
+          });
+
         }
       }
     }

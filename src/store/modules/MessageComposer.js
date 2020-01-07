@@ -26,11 +26,12 @@ export const messageComposer = {
     [messageComposerActions.sendMessage]: (context, payload) => {
       const {message} = payload;
       context.commit(messageComposerMutations.messageSending);
-      MailService
+      return MailService
         .sendMessage(message)
         .then((message) => {
           context.commit(messageComposerMutations.messageSent, {message});
           context.commit(mailboxMutations.messageSent, {message});
+          return message;
         })
     }
   }
