@@ -40,7 +40,7 @@
       name: 'MessageDetail',
       props: {
         message: Object,
-        onDelete: Function,
+        onDelete: Function, // TODO: Change to event
       }
     }
 </script>

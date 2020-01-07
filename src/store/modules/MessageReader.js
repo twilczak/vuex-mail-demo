@@ -9,7 +9,7 @@ export const messageReaderMutations = {
 };
 
 export const messageReaderActions = {
-  fetchMessage: '[Message Reader] Fetch Message',
+  fetchMessage:  '[Message Reader] Fetch Message',
   deleteMessage: '[Message Reader] Delete Message'
 };
 

@@ -1,9 +1,10 @@
 import { MailService } from '../../api/MailService';
 
 export const mailboxMutations = {
-  messagesLoading: '[Mailbox] Messages Loading',
-  messagesLoaded: '[Mailbox] Messages Loaded',
-  messageDeleted: '[Mailbox] Message Deleted'
+  messagesLoading:  '[Mailbox] Messages Loading',
+  messagesLoaded:   '[Mailbox] Messages Loaded',
+  messageDeleted:   '[Mailbox] Message Deleted',
+  messageSent:      '[Mailbox] Message Sent'
 };
 
 export const mailboxActions = {
@@ -24,6 +25,10 @@ export const mailbox = {
       const {mailbox, messages} = payload;
       state[mailbox] = messages;
       state.isLoading = false;
+    },
+    [mailboxMutations.messageSent]: (state, payload) => {
+      const {message} = payload;
+      state.inbox = state.inbox.concat([message]);
     },
     [mailboxMutations.messageDeleted]: (state, payload) => {
       const {mailbox, id} = payload;
